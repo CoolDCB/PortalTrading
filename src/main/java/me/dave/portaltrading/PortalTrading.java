@@ -15,7 +15,7 @@ public final class PortalTrading extends JavaPlugin {
         configManager = new ConfigManager();
         Listener[] listeners = new Listener[] { new PortalEvents() };
         registerEvents(listeners);
-        getCommand("portaltrading").setExecutor(new PortalTrading());
+        getCommand("portaltrading").setExecutor(new PortalCmd());
     }
 
     public static PortalTrading getInstance() { return plugin; }
