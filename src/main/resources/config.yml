@@ -1,0 +1,14 @@
+# prefix: Text to go before plugin messages
+prefix: "&d&lPortalTrading &8» &r"
+
+# barter-trades: Enable bartering trades when throwing a gold ingot into the portal
+barter-trades: true
+
+# trades: Custom trades
+trades:
+  # MATERIAL: Material thrown in
+  WET_SPONGE:
+    # material: Material returned
+    material: SPONGE
+    # amount: Number of material returned
+    amount: 1

@@ -1,0 +1,11 @@
+name: PortalTrading
+version: '${project.version}'
+main: me.dave.portaltrading.PortalTrading
+api-version: 1.19
+authors: [ Dav_e_ ]
+description: Toss items into a portal and the piglins may toss something back
+commands:
+  portaltrading:
+    description: The main PortalTrading Command.
+    aliases: pt
+    usage: /portaltrading
