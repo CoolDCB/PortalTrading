@@ -1,6 +1,5 @@
 package me.dave.portaltrading;
 
-import me.dave.portaltrading.PortalTrading;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -51,9 +50,10 @@ public class ConfigManager {
     public ItemStack getTradeOutput(ItemStack itemStack) {
         Material material = itemStack.getType();
         if (!tradeMap.containsKey(material)) return null;
-        ItemStack outputItemStack = tradeMap.get(material).clone();
-        int outputAmount = outputItemStack.getAmount() * itemStack.getAmount();
-        outputItemStack.setAmount(outputAmount);
-        return outputItemStack;
+        return tradeMap.get(material).clone();
+    }
+
+    public boolean hasTrade(Material material) {
+        return tradeMap.containsKey(material);
     }
 }

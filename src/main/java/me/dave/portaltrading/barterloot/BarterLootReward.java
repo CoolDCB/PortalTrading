@@ -6,9 +6,9 @@ import java.util.Random;
 import java.util.concurrent.Callable;
 
 public class BarterLootReward implements Callable<ItemStack> {
-    Callable<ItemStack> reward;
-    int minAmount;
-    int maxAmount;
+    private final Callable<ItemStack> reward;
+    private final int minAmount;
+    private final int maxAmount;
 
     public BarterLootReward(Callable<ItemStack> reward, int minAmount, int maxAmount) {
         this.reward = reward;

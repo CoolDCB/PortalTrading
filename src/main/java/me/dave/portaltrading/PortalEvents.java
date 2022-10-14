@@ -1,6 +1,7 @@
 package me.dave.portaltrading;
 
 import me.dave.portaltrading.barterloot.BarterLootGen;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -14,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 public class PortalEvents implements Listener {
+    private final PortalTrading plugin = PortalTrading.getInstance();
     private final BarterLootGen barterLootGen = new BarterLootGen();
 
     @EventHandler
@@ -23,28 +25,38 @@ public class PortalEvents implements Listener {
         Location location = event.getLocation();
         Block block = location.getBlock();
         if (block.getType() != Material.NETHER_PORTAL) return;
+        inputEntity.setPortalCooldown(Integer.MAX_VALUE);
+        if (inputEntity.getThrower() == null) return;
+
         ItemStack inputItem = inputEntity.getItemStack();
+        Material oldMaterial = inputItem.getType();
 
-        if (inputItem.getType() == Material.GOLD_INGOT && PortalTrading.configManager.hasBarterTradesEnabled()) {
-            exchangeItem(inputEntity, barterLootGen.generate());
-            return;
+        boolean hasTrade = PortalTrading.configManager.hasTrade(oldMaterial);
+        boolean barterEnabled = PortalTrading.configManager.hasBarterTradesEnabled();
+        boolean isGoldIngot = oldMaterial == Material.GOLD_INGOT;
+        if (!hasTrade && !(barterEnabled && isGoldIngot)) return;
+
+        World world = inputEntity.getWorld();
+        int stackSize = inputItem.getAmount();
+        Vector reverseVelocity = inputEntity.getVelocity().clone().multiply(-1);
+        inputEntity.remove();
+
+        int tickOffset = 0;
+        for (int i = 0; i < stackSize; i++) {
+            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                ItemStack outputItem;
+                if (oldMaterial == Material.GOLD_INGOT && PortalTrading.configManager.hasBarterTradesEnabled()) {
+                    outputItem = barterLootGen.generate();
+                } else {
+                    outputItem = PortalTrading.configManager.getTradeOutput(inputItem);
+                }
+
+                if (outputItem == null) return;
+                Item outputEntity = world.dropItem(location.clone().add(0.5, 0.5, 0.5), outputItem);
+                outputEntity.setPortalCooldown(Integer.MAX_VALUE);
+                outputEntity.setVelocity(reverseVelocity.clone());
+            }, tickOffset);
+            tickOffset += 1;
         }
-
-        ItemStack outputItem = PortalTrading.configManager.getTradeOutput(inputItem);
-        if (outputItem == null) {
-            inputEntity.setPortalCooldown(Integer.MAX_VALUE);
-            return;
-        }
-        exchangeItem(inputEntity, outputItem);
-    }
-
-    public void exchangeItem(Item oldItem, ItemStack newItem) {
-        Location location = oldItem.getLocation();
-        World world = oldItem.getWorld();
-        Vector inputVelocity = oldItem.getVelocity();
-        oldItem.remove();
-        Item outputEntity = world.dropItem(location.add(0.5, 0.5, 0.5), newItem);
-        outputEntity.setPortalCooldown(Integer.MAX_VALUE);
-        outputEntity.setVelocity(inputVelocity.multiply(-1));
     }
 }

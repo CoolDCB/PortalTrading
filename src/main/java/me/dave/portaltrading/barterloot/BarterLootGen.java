@@ -6,8 +6,8 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionType;
 
 import java.util.Random;
 
@@ -25,28 +25,32 @@ public class BarterLootGen {
                 return itemStack;
             }, 1, 1), 5)
             .add(new BarterLootReward(() -> {
-                ItemStack itemStack = new ItemStack(Material.IRON_BOOTS);
-                EnchantmentStorageMeta itemMeta = (EnchantmentStorageMeta) itemStack.getItemMeta();
                 int randomNum = new Random().nextInt((3 - 1) + 1) + 1;
-                itemMeta.addStoredEnchant(Enchantment.SOUL_SPEED, randomNum, true);
-                itemStack.setItemMeta(itemMeta);
+                ItemStack itemStack = new ItemStack(Material.IRON_BOOTS);
+                itemStack.addEnchantment(Enchantment.SOUL_SPEED, randomNum);
                 return itemStack;
             }, 1, 1), 8)
             .add(new BarterLootReward(() -> {
                 ItemStack itemStack = new ItemStack(Material.SPLASH_POTION);
                 PotionMeta itemMeta = (PotionMeta) itemStack.getItemMeta();
-                itemMeta.addCustomEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 3600, 1), false);
+                itemMeta.setBasePotionData(new PotionData(PotionType.FIRE_RESISTANCE, false, false));
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             }, 1, 1), 8)
             .add(new BarterLootReward(() -> {
                 ItemStack itemStack = new ItemStack(Material.POTION);
                 PotionMeta itemMeta = (PotionMeta) itemStack.getItemMeta();
-                itemMeta.addCustomEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 3600, 1), false);
+                itemMeta.setBasePotionData(new PotionData(PotionType.FIRE_RESISTANCE, false, false));
                 itemStack.setItemMeta(itemMeta);
                 return itemStack;
             }, 1, 1), 10)
-            .add(new BarterLootReward(() -> new ItemStack(Material.POTION), 1,1), 10)
+            .add(new BarterLootReward(() -> {
+                ItemStack itemStack = new ItemStack(Material.POTION);
+                PotionMeta itemMeta = (PotionMeta) itemStack.getItemMeta();
+                itemMeta.setBasePotionData(new PotionData(PotionType.WATER, false, false));
+                itemStack.setItemMeta(itemMeta);
+                return itemStack;
+            }, 1, 1), 10)
             .add(new BarterLootReward(() -> new ItemStack(Material.IRON_NUGGET), 10,36), 10)
             .add(new BarterLootReward(() -> new ItemStack(Material.ENDER_PEARL), 2,4), 10)
             .add(new BarterLootReward(() -> new ItemStack(Material.STRING), 3,9), 20)
