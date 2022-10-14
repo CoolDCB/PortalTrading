@@ -1,10 +1,7 @@
 package me.dave.portaltrading;
 
 import me.dave.portaltrading.barterloot.BarterLootGen;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
@@ -55,6 +52,7 @@ public class PortalEvents implements Listener {
                 Item outputEntity = world.dropItem(location.clone().add(0.5, 0.5, 0.5), outputItem);
                 outputEntity.setPortalCooldown(Integer.MAX_VALUE);
                 outputEntity.setVelocity(reverseVelocity.clone());
+                world.playSound(location, Sound.BLOCK_END_PORTAL_FRAME_FILL, 0.6f, 2f);
             }, tickOffset);
             tickOffset += 1;
         }
