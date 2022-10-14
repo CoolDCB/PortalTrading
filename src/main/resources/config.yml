@@ -4,6 +4,9 @@ prefix: "&d&lPortalTrading &8» &r"
 # barter-trades: Enable bartering trades when throwing a gold ingot into the portal
 barter-trades: true
 
+# ticks-per-item: Number of ticks between each item being traded out of the portal
+ticks-per-item: 2
+
 # trades: Custom trades
 trades:
   # MATERIAL: Material thrown in

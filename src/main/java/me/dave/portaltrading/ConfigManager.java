@@ -12,6 +12,7 @@ public class ConfigManager {
     private final PortalTrading plugin = PortalTrading.getInstance();
     private String prefix;
     private boolean hasBarterTradesEnabled;
+    private int ticksPerItem;
     private final HashMap<Material, ItemStack> tradeMap = new HashMap<>();
 
     public ConfigManager() {
@@ -27,6 +28,7 @@ public class ConfigManager {
         prefix = config.getString("prefix", "");
         prefix = ChatColor.translateAlternateColorCodes('&', prefix);
         hasBarterTradesEnabled = config.getBoolean("barter-trades");
+        ticksPerItem = config.getInt("ticks-per-item", 2);
 
         ConfigurationSection tradesSection = config.getConfigurationSection("trades");
         if (tradesSection == null) return;
@@ -45,6 +47,10 @@ public class ConfigManager {
 
     public boolean hasBarterTradesEnabled() {
         return hasBarterTradesEnabled;
+    }
+
+    public int getTicksPerItem() {
+        return ticksPerItem;
     }
 
     public ItemStack getTradeOutput(ItemStack itemStack) {

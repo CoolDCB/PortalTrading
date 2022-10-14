@@ -39,6 +39,7 @@ public class PortalEvents implements Listener {
         inputEntity.remove();
 
         int tickOffset = 0;
+        int ticksPerItem = PortalTrading.configManager.getTicksPerItem();
         for (int i = 0; i < stackSize; i++) {
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
                 ItemStack outputItem;
@@ -54,7 +55,7 @@ public class PortalEvents implements Listener {
                 outputEntity.setVelocity(reverseVelocity.clone());
                 world.playSound(location, Sound.BLOCK_END_PORTAL_FRAME_FILL, 0.6f, 2f);
             }, tickOffset);
-            tickOffset += 1;
+            tickOffset += ticksPerItem;
         }
     }
 }
