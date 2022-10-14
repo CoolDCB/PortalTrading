@@ -1,7 +1,5 @@
 package me.dave.portaltrading;
 
-import me.dave.portaltrading.datamanager.ConfigManager;
-import me.dave.portaltrading.events.PortalEvents;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 

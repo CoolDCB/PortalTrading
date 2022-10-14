@@ -1,4 +1,4 @@
-package me.dave.portaltrading.datamanager;
+package me.dave.portaltrading;
 
 import me.dave.portaltrading.PortalTrading;
 import org.bukkit.ChatColor;
@@ -23,6 +23,7 @@ public class ConfigManager {
     public void reloadConfig() {
         plugin.reloadConfig();
         FileConfiguration config = plugin.getConfig();
+        tradeMap.clear();
 
         prefix = config.getString("prefix", "");
         prefix = ChatColor.translateAlternateColorCodes('&', prefix);
