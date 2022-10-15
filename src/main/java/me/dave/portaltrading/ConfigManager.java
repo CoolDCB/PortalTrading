@@ -27,7 +27,7 @@ public class ConfigManager {
 
         prefix = config.getString("prefix", "");
         prefix = ChatColor.translateAlternateColorCodes('&', prefix);
-        hasBarterTradesEnabled = config.getBoolean("barter-trades");
+        hasBarterTradesEnabled = config.getBoolean("barter-trades", false);
         ticksPerItem = config.getInt("ticks-per-item", 2);
 
         ConfigurationSection tradesSection = config.getConfigurationSection("trades");
