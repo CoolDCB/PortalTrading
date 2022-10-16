@@ -26,7 +26,7 @@ public class PortalCmd implements CommandExecutor, TabCompleter {
             }
         }
         PluginDescriptionFile pdf = PortalTrading.getInstance().getDescription();
-        sender.sendMessage("You are currently running MusicRegions Version: " + pdf.getVersion());
+        sender.sendMessage("You are currently running " + pdf.getName() + " Version: " + pdf.getVersion());
         return true;
     }
 
