@@ -26,6 +26,7 @@ public class PlayerListener implements Listener {
             double x = newVelocity.getX() >= 0 ? Math.max(newVelocity.getX(), 1) : Math.min(newVelocity.getX(), -1);
             double z = newVelocity.getZ() >= 0 ? Math.max(newVelocity.getZ(), 1) : Math.min(newVelocity.getZ(), -1);
 
+            // TODO: Add title/subtitle on bounce
             player.setVelocity(new Vector(x, 0.3, z));
         }
     }
