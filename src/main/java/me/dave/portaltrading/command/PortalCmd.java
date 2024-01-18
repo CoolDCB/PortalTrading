@@ -1,5 +1,6 @@
-package me.dave.portaltrading;
+package me.dave.portaltrading.command;
 
+import me.dave.portaltrading.PortalTrading;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

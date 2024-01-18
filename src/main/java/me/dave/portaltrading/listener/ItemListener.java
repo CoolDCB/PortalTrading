@@ -1,5 +1,6 @@
-package me.dave.portaltrading;
+package me.dave.portaltrading.listener;
 
+import me.dave.portaltrading.PortalTrading;
 import me.dave.portaltrading.barterloot.BarterLootGen;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -13,9 +14,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
 
-public class PortalEvents implements Listener {
+public class ItemListener implements Listener {
     private final PortalTrading plugin = PortalTrading.getInstance();
-    private final BarterLootGen barterLootGen = new BarterLootGen();
 
     @EventHandler
     public void onEntityEnterPortal(EntityPortalEnterEvent event) {
@@ -113,7 +113,7 @@ public class PortalEvents implements Listener {
 
                 ItemStack outputItem;
                 if (oldMaterial == Material.GOLD_INGOT && PortalTrading.configManager.hasBarterTradesEnabled()) {
-                    outputItem = barterLootGen.generate();
+                    outputItem = BarterLootGen.generate();
                 } else {
                     outputItem = PortalTrading.configManager.getTradeOutput(inputItem);
                 }

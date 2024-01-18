@@ -12,10 +12,7 @@ import org.bukkit.potion.PotionType;
 import java.util.Random;
 
 public class BarterLootGen {
-    private final RandomCollection<Object> rc;
-
-    public BarterLootGen() {
-        rc = new RandomCollection<>()
+    private static final RandomCollection<Object> BARTER_LOOT = new RandomCollection<>()
             .add(new BarterLootReward(() -> {
                 ItemStack itemStack = new ItemStack(Material.ENCHANTED_BOOK);
                 EnchantmentStorageMeta itemMeta = (EnchantmentStorageMeta) itemStack.getItemMeta();
@@ -64,10 +61,9 @@ public class BarterLootGen {
             .add(new BarterLootReward(() -> new ItemStack(Material.SPECTRAL_ARROW), 6,12), 40)
             .add(new BarterLootReward(() -> new ItemStack(Material.GRAVEL), 8,16), 40)
             .add(new BarterLootReward(() -> new ItemStack(Material.BLACKSTONE), 8,16), 40);
-    }
 
-    public ItemStack generate() {
-        BarterLootReward reward = (BarterLootReward) rc.next();
+    public static ItemStack generate() {
+        BarterLootReward reward = (BarterLootReward) BARTER_LOOT.next();
         ItemStack itemStack;
         try {
             itemStack = reward.call();

@@ -1,5 +1,6 @@
-package me.dave.portaltrading;
+package me.dave.portaltrading.config;
 
+import me.dave.portaltrading.PortalTrading;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
