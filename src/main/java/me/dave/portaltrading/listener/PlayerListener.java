@@ -28,6 +28,7 @@ public class PlayerListener implements Listener {
             double z = newVelocity.getZ() >= 0 ? Math.max(newVelocity.getZ(), 1) : Math.min(newVelocity.getZ(), -1);
 
             ChatColorHandler.sendTitle(player, null, "&#eb6e6eThe Portal isn't strong enough!", 0, 100, 10);
+            ChatColorHandler.sendMessage(player, "&#eb6e6eThe Portal isn't strong enough! Try throwing items in and see if the piglins will trade");
             player.setVelocity(new Vector(x, 0.3, z));
         }
     }
