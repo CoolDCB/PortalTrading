@@ -1,5 +1,6 @@
 package me.dave.portaltrading.listener;
 
+import me.dave.chatcolorhandler.ChatColorHandler;
 import me.dave.portaltrading.PortalTrading;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -20,13 +21,13 @@ public class PlayerListener implements Listener {
             UUID playerUUID = player.getUniqueId();
 
             playerCooldowns.add(playerUUID);
-            Bukkit.getScheduler().runTaskLaterAsynchronously(PortalTrading.getInstance(), () -> playerCooldowns.remove(playerUUID), 50);
+            Bukkit.getScheduler().runTaskLaterAsynchronously(PortalTrading.getInstance(), () -> playerCooldowns.remove(playerUUID), 30);
 
             Vector newVelocity = player.getVelocity().multiply(-5);
             double x = newVelocity.getX() >= 0 ? Math.max(newVelocity.getX(), 1) : Math.min(newVelocity.getX(), -1);
             double z = newVelocity.getZ() >= 0 ? Math.max(newVelocity.getZ(), 1) : Math.min(newVelocity.getZ(), -1);
 
-            // TODO: Add title/subtitle on bounce
+            ChatColorHandler.sendTitle(player, null, "&#eb6e6eThe Portal isn't strong enough!", 0, 100, 10);
             player.setVelocity(new Vector(x, 0.3, z));
         }
     }
